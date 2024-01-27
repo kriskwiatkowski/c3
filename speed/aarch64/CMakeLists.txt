@@ -1,6 +1,7 @@
 add_executable(
   keccak_aarch64_driver_1
   keccak_aarch64_driver_1.cpp
+  keccak_aarch64_1.S
 )
 
 target_include_directories(
