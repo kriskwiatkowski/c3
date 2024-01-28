@@ -235,13 +235,34 @@ keccakf1600_asm_1:
     and x28,x13,x19
     bic x29,x20,x19
     orr x30,x20, x1
-    eon x19,x30,x19
+    eon x19,x30,x19 // release x30, so it can be reused
     and x30, x1, x7
     eor  x1, x1,x27
     eor  x7, x7,x28
     eor x13,x13,x29
     eor x20,x20,x30
 
+    and x27, x5,x11 // c0
+    orr x28,x11,x17 // c1
+    orn x29,x23,x17 // c2
+    eor x11,x11,x29 // release x29
+    and x30,x23, x4 // c3
+    orr x29, x4, x5 // c4
+    eor  x4, x4,x27
+    eor  x5, x5,x28
+    eon x17,x17,x30
+    eor x23,x23,x29
+
+    bic x27,x14, x8 // c0
+    orr x28,x14,x15 // c1
+    and x29,x15,x21 // c2
+    orr x30,x21, x2 // c3
+    eor x14,x14,x29
+    and x29, x2, x8 // c4
+    eor x15,x15,x30
+    eor  x2, x2,x27
+    eon  x8,x28, x8
+    eor x21,x21,x29
 
     STRST
     LDR_PROC_REGS
