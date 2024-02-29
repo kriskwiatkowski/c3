@@ -29,6 +29,7 @@ add_executable(
   keccak_aarch64_driver_2.cpp
   keccak_f1600x2_armv8A_neon_1.S
   keccak_f1600x2_armv8A_neon_2.S
+  keccak_f1600x2_armv8A_neon_3.S
 )
 
 target_include_directories(
@@ -48,4 +49,20 @@ target_link_libraries(
   PRIVATE
   benchmark
   benchmark_main
+)
+
+add_executable(
+  keccak_interop
+  keccak_interop.cpp
+  keccak_aarch64_1.S
+  keccak_aarch64_2.S
+  keccak_f1600x2_armv8A_neon_1.S
+  keccak_f1600x2_armv8A_neon_2.S
+  keccak_f1600x2_armv8A_neon_3.S
+)
+
+target_include_directories(
+  keccak_interop
+  PRIVATE
+  ${GBENCH_INC_DIR}
 )
