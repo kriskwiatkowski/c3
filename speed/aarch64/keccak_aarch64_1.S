@@ -5,36 +5,10 @@
 #define COUNT_REG x28
 #define IOTA_REG x27
 
-#ifdef __APPLE__
-IOTA24:
-    .quad   0x0000000000000001
-    .quad   0x0000000000008082
-    .quad   0x800000000000808a
-    .quad   0x8000000080008000
-    .quad   0x000000000000808b
-    .quad   0x0000000080000001
-    .quad   0x8000000080008081
-    .quad   0x8000000000008009
-    .quad   0x000000000000008a
-    .quad   0x0000000000000088
-    .quad   0x0000000080008009
-    .quad   0x000000008000000a
-IOTA12:
-    .quad   0x000000008000808b
-    .quad   0x800000000000008b
-    .quad   0x8000000000008089
-    .quad   0x8000000000008003
-    .quad   0x8000000000008002
-    .quad   0x8000000000000080
-    .quad   0x000000000000800a
-    .quad   0x800000008000000a
-    .quad   0x8000000080008081
-    .quad   0x8000000000008080
-    .quad   0x0000000080000001
-    .quad   0x8000000080008008
-#else /* !__APPLE__ */
+#if !defined(__APPLE__)
 .align 8
 .type IOTA24,%object
+#endif
 IOTA24:
     .quad   0x0000000000000001
     .quad   0x0000000000008082
@@ -61,6 +35,7 @@ IOTA12:
     .quad   0x8000000000008080
     .quad   0x0000000080000001
     .quad   0x8000000080008008
+#if !defined(__APPLE__)
 .size   IOTA24,.-IOTA24
 #endif
 
@@ -77,7 +52,6 @@ IOTA12:
 #endif
 
 .macro ldr_iota_val
-    // OZAPTF: just save current address?
     ldr IOTA_REG, [sp, IOTA_LOC]
     ldr IOTA_REG, [IOTA_REG, COUNT_REG, lsl #3]
 .endm
@@ -90,7 +64,7 @@ IOTA12:
     stp x25, x26, [sp, #-16]!
     stp x27, x28, [sp, #-16]!
     stp x29, x30, [sp, #-16]! // LR and SP
-    // OZAPTF: Why 32 on MAC not 16?
+    // TODO: will crash on Mac, but see keccak_aarch64_2.S
     sub sp, sp, #32           // Leave a space to store round counter
                               // Note, sp address must be 16-byte aligned
 .endm

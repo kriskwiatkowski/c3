@@ -7,36 +7,10 @@
 #define COUNT_REG x28
 #define IOTA_REG x27
 
-#ifdef __APPLE__
-IOTA24:
-    .quad   0x0000000000000001
-    .quad   0x0000000000008082
-    .quad   0x800000000000808a
-    .quad   0x8000000080008000
-    .quad   0x000000000000808b
-    .quad   0x0000000080000001
-    .quad   0x8000000080008081
-    .quad   0x8000000000008009
-    .quad   0x000000000000008a
-    .quad   0x0000000000000088
-    .quad   0x0000000080008009
-    .quad   0x000000008000000a
-IOTA12:
-    .quad   0x000000008000808b
-    .quad   0x800000000000008b
-    .quad   0x8000000000008089
-    .quad   0x8000000000008003
-    .quad   0x8000000000008002
-    .quad   0x8000000000000080
-    .quad   0x000000000000800a
-    .quad   0x800000008000000a
-    .quad   0x8000000080008081
-    .quad   0x8000000000008080
-    .quad   0x0000000080000001
-    .quad   0x8000000080008008
-#else /* !__APPLE__ */
+#if !defined(__APPLE__)
 .align 8
 .type IOTA24,%object
+#endif
 IOTA24:
     .quad   0x0000000000000001
     .quad   0x0000000000008082
@@ -63,6 +37,7 @@ IOTA12:
     .quad   0x8000000000008080
     .quad   0x0000000080000001
     .quad   0x8000000080008008
+#if !defined(__APPLE__)
 .size   IOTA24,.-IOTA24
 #endif
 
@@ -79,33 +54,33 @@ IOTA12:
 #endif
 
 .macro ldr_iota_val
-    // OZAPTF: just save current address?
     ldr IOTA_REG, [sp, IOTA_LOC]
     ldr IOTA_REG, [IOTA_REG, COUNT_REG, lsl #3]
 .endm
 
 // Stores callee-saved registers
 .macro STR_PROC_REGS
-    stp x19, x20, [sp, #-16]!
-    stp x21, x22, [sp, #-16]!
-    stp x23, x24, [sp, #-16]!
-    stp x25, x26, [sp, #-16]!
-    stp x27, x28, [sp, #-16]!
-    stp x29, x30, [sp, #-16]! // LR and SP
-    // OZAPTF: Why 32 on MAC not 16?
-    sub sp, sp, #48           // Leave a space to store round counter
-                              // Note, sp address must be 16-byte aligned
+    // Leave a space to store round counter, iota location and
+    // temporary value. NOTE: sp address must be 16-byte aligned.
+    sub sp, sp, #32+(6*16)
+    stp x19, x20, [sp], #16
+    stp x21, x22, [sp], #16
+    stp x23, x24, [sp], #16
+    stp x25, x26, [sp], #16
+    stp x27, x28, [sp], #16
+    stp x29, x30, [sp], #16 // LR and SP
 .endm
 
 // Load callee-saved registers
 .macro LDR_PROC_REGS
-    add sp, sp, #48
-    ldp x29, x30, [sp], #16
-    ldp x27, x28, [sp], #16
-    ldp x25, x26, [sp], #16
-    ldp x23, x24, [sp], #16
-    ldp x21, x22, [sp], #16
+    sub sp, sp, #(6*16)
     ldp x19, x20, [sp], #16
+    ldp x21, x22, [sp], #16
+    ldp x23, x24, [sp], #16
+    ldp x25, x26, [sp], #16
+    ldp x27, x28, [sp], #16
+    ldp x29, x30, [sp], #16
+    add sp, sp, #32 // Unwind stack
 .endm
 
 .macro STRST
@@ -458,7 +433,6 @@ keccakf1600_asm_2:
     mov COUNT_REG, KECCAK_ROUNDS
     ldr_iota_val
     eor x0, x0, IOTA_REG
-    //
     do_Store_State_and_Finish_Chi
 
     LDR_PROC_REGS
