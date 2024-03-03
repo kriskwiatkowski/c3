@@ -22,7 +22,7 @@ ExternalProject_Add(
 	PREFIX         ${GBENCH_BASE_DIR}
 	INSTALL_COMMAND "" # don't install when "make install" is called on main project
 	GIT_REPOSITORY https://github.com/kriskwiatkowski/benchmark.git
-	GIT_TAG        hdc/release_crypto
+	GIT_TAG        d6d72ab63163d764d42fdeb84c043c873e69b1fd
 	CMAKE_ARGS     ${COMMON_CXX_FLAGS} ${GBENCH_EXTRA_FLAGS} ${TOOLCHAIN}
 )
 
