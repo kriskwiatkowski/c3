@@ -1,14 +1,29 @@
+/*
+ * Copyright (C) Kris Kwiatkowski, Among Bytes LTD
+ *
+ * This software is provided by Krzysztof Kwiatkowski's,
+ * customers and partners, pursuant to the terms and
+ * conditions of a separate written agreement with
+ * Krzysztof Kwiatkowski or its affiliate. This software
+ * may be subject to export or import laws in certain
+ * countries.
+ */
+
     .arch   armv8-a
 
 // Number of rounds in the kaccak. Change to 12-1 for TurboShake
-#define KECCAK_ROUNDS 24
+.equ KECCAK_ROUNDS, 24
+// Register storing round counter
+COUNT_REG       .req x5
 // Location of a round counter on a stack
-#define COUNT_REG x5
-#define IOTA_BASE_REG x6
-#define IOTA_REG x7
-#define TMP_REG1 x8
-#define TMP_REG2 x9
-#define IOTA_VEC_REG v25
+IOTA_BASE_REG   .req x6
+// Register used to load IOTA
+IOTA_REG        .req x7
+// Register with populated IOTA (required by SIMD)
+IOTA_VEC_REG    .req v25
+// Temporary registers
+TMP_REG1        .req x8
+TMP_REG2        .req x9
 
 #if !defined(__APPLE__)
 .align 8
@@ -256,10 +271,8 @@ IOTA12:
     eor v0.16b, v0.16b, IOTA_VEC_REG.16b
 .endm
 
-
 // SHA3x2 core
 .text
-
 #if defined(__APPLE__)
 .p2align 4,,15
 .globl _keccakf1600x2_asm_2
