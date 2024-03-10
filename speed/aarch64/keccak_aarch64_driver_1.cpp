@@ -20,32 +20,28 @@ static inline void add_cycleclock(benchmark::State &st, int64_t cycles) {
 static void keccakf1600_asm_1(benchmark::State &st) {
     size_t t, total = 0;
     uint64_t state[25];
+    t = benchmark::cycleclock::Now();
     for (auto _: st) {
-        t = benchmark::cycleclock::Now();
-
         keccakf1600_asm_1(state);
-
-        total += benchmark::cycleclock::Now() - t;
         benchmark::DoNotOptimize(t);
         benchmark::DoNotOptimize(total);
         benchmark::ClobberMemory();
     }
+    total += benchmark::cycleclock::Now() - t;
     add_cycleclock(st, total);
 }
 
 static void keccakf1600_asm_2(benchmark::State &st) {
     size_t t, total = 0;
     uint64_t state[25];
+    t = benchmark::cycleclock::Now();
     for (auto _: st) {
-        t = benchmark::cycleclock::Now();
-
         keccakf1600_asm_2(state);
-
-        total += benchmark::cycleclock::Now() - t;
         benchmark::DoNotOptimize(t);
         benchmark::DoNotOptimize(total);
         benchmark::ClobberMemory();
     }
+    total += benchmark::cycleclock::Now() - t;
     add_cycleclock(st, total);
 }
 
