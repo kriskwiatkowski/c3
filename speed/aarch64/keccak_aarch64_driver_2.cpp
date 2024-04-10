@@ -29,6 +29,7 @@ static void keccakf1600x2_1(benchmark::State &st) {
         benchmark::DoNotOptimize(total);
         benchmark::ClobberMemory();
     }
+    total += benchmark::cycleclock::Now() - t;
     add_cycleclock(st, total);
 }
 
