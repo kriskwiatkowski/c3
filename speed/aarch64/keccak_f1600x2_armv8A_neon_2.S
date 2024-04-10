@@ -1,13 +1,17 @@
 /*
  * Copyright (C) Kris Kwiatkowski, Among Bytes LTD
  *
- * This software is provided by Krzysztof Kwiatkowski's,
- * customers and partners, pursuant to the terms and
- * conditions of a separate written agreement with
- * Krzysztof Kwiatkowski or its affiliate. This software
- * may be subject to export or import laws in certain
- * countries.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.  See <http://www.fsf.org/copyleft/gpl.txt>.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * for more details.
  */
+
 
     .arch   armv8-a
 
