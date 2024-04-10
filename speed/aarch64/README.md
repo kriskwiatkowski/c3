@@ -9,7 +9,7 @@
 	- Result on M2: ``191 ns``
 
 * ``keccak_aarch_2.S``
-	Uses stack to reduce contention on registers. Offloads pair of registers when computing ``D``. Does Rho+Pi and
+	Uses stack to reduce contention on registers. Offloads pair of registers when computing ``D``.
 
 	- Result on RPi5: ``453 ns, Cycles=1.08552k``
 	- Result on M2: ``195 ns``
