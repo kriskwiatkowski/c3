@@ -28,4 +28,8 @@
 	- Result on RPi5: ``1092 ns, Cycles=2.62076k``
 	- Result on M2: ``315 ns``
 
+* ``keccak_f1600x2_armv8A_neon_3.S``
+	Tries to reduce contention by using stack.
+	*** This implementation is not finished ***
+
 
