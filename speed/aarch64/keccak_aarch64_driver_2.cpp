@@ -36,6 +36,7 @@ static void keccakf1600x2_1(benchmark::State &st) {
 static void keccakf1600x2_2(benchmark::State &st) {
     size_t t, total = 0;
     uint64_t state[25 * 2], s2[25 * 2];
+
     t = benchmark::cycleclock::Now();
     for (auto _: st) {
         keccakf1600x2_asm_2(state);

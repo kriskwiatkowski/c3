@@ -80,32 +80,68 @@ IOTA12:
     // Leave a space to store round counter, iota location and
     // temporary value. NOTE: sp address must be 16-byte aligned.
     sub sp, sp, #64
-    st4 { v8.d-v11.d}[0], [sp], #32
-    st4 {v12.d-v15.d}[0], [sp], #32
+    ST4 { v8.d-v11.d}[0], [sp], #32
+    ST4 {v12.d-v15.d}[0], [sp], #32
 .endm
 
 // Load callee-saved registers
 .macro LDR_PROC_REGS
     sub sp, sp, #64
-    ld4 { v8.d-v11.d}[0], [sp], #32
-    ld4 {v12.d-v15.d}[0], [sp], #32
+    LD4 { v8.d-v11.d}[0], [sp], #32
+    LD4 {v12.d-v15.d}[0], [sp], #32
 .endm
 
 .macro do_Load_State
     mov TMP_REG1,x0
     add TMP_REG2,x0,#200
-    LD4 {  v0.d- v3.d }[0], [TMP_REG1], #8*4
-    LD4 {  v0.d- v3.d }[1], [TMP_REG2], #8*4
-    LD4 {  v4.d- v7.d }[0], [TMP_REG1], #8*4
-    LD4 {  v4.d- v7.d }[1], [TMP_REG2], #8*4
-    LD4 {  v8.d-v11.d }[0], [TMP_REG1], #8*4
-    LD4 {  v8.d-v11.d }[1], [TMP_REG2], #8*4
-    LD4 { v12.d-v15.d }[0], [TMP_REG1], #8*4
-    LD4 { v12.d-v15.d }[1], [TMP_REG2], #8*4
-    LD4 { v16.d-v19.d }[0], [TMP_REG1], #8*4
-    LD4 { v16.d-v19.d }[1], [TMP_REG2], #8*4
-    LD4 { v20.d-v23.d }[0], [TMP_REG1], #8*4
-    LD4 { v20.d-v23.d }[1], [TMP_REG2], #8*4
+    LD1 {  v0.d }[0], [TMP_REG1], #8
+    LD1 {  v1.d }[0], [TMP_REG1], #8
+    LD1 {  v2.d }[0], [TMP_REG1], #8
+    LD1 {  v3.d }[0], [TMP_REG1], #8
+    LD1 {  v0.d }[1], [TMP_REG2], #8
+    LD1 {  v1.d }[1], [TMP_REG2], #8
+    LD1 {  v2.d }[1], [TMP_REG2], #8
+    LD1 {  v3.d }[1], [TMP_REG2], #8
+    LD1 {  v4.d }[0], [TMP_REG1], #8
+    LD1 {  v5.d }[0], [TMP_REG1], #8
+    LD1 {  v6.d }[0], [TMP_REG1], #8
+    LD1 {  v7.d }[0], [TMP_REG1], #8
+    LD1 {  v4.d }[1], [TMP_REG2], #8
+    LD1 {  v5.d }[1], [TMP_REG2], #8
+    LD1 {  v6.d }[1], [TMP_REG2], #8
+    LD1 {  v7.d }[1], [TMP_REG2], #8
+    LD1 {  v8.d }[0], [TMP_REG1], #8
+    LD1 {  v9.d }[0], [TMP_REG1], #8
+    LD1 { v10.d }[0], [TMP_REG1], #8
+    LD1 { v11.d }[0], [TMP_REG1], #8
+    LD1 {  v8.d }[1], [TMP_REG2], #8
+    LD1 {  v9.d }[1], [TMP_REG2], #8
+    LD1 { v10.d }[1], [TMP_REG2], #8
+    LD1 { v11.d }[1], [TMP_REG2], #8
+    LD1 { v12.d }[0], [TMP_REG1], #8
+    LD1 { v13.d }[0], [TMP_REG1], #8
+    LD1 { v14.d }[0], [TMP_REG1], #8
+    LD1 { v15.d }[0], [TMP_REG1], #8
+    LD1 { v12.d }[1], [TMP_REG2], #8
+    LD1 { v13.d }[1], [TMP_REG2], #8
+    LD1 { v14.d }[1], [TMP_REG2], #8
+    LD1 { v15.d }[1], [TMP_REG2], #8
+    LD1 { v16.d }[0], [TMP_REG1], #8
+    LD1 { v17.d }[0], [TMP_REG1], #8
+    LD1 { v18.d }[0], [TMP_REG1], #8
+    LD1 { v19.d }[0], [TMP_REG1], #8
+    LD1 { v16.d }[1], [TMP_REG2], #8
+    LD1 { v17.d }[1], [TMP_REG2], #8
+    LD1 { v18.d }[1], [TMP_REG2], #8
+    LD1 { v19.d }[1], [TMP_REG2], #8
+    LD1 { v20.d }[0], [TMP_REG1], #8
+    LD1 { v21.d }[0], [TMP_REG1], #8
+    LD1 { v22.d }[0], [TMP_REG1], #8
+    LD1 { v23.d }[0], [TMP_REG1], #8
+    LD1 { v20.d }[1], [TMP_REG2], #8
+    LD1 { v21.d }[1], [TMP_REG2], #8
+    LD1 { v22.d }[1], [TMP_REG2], #8
+    LD1 { v23.d }[1], [TMP_REG2], #8
     LD1 { v24.d }[0], [TMP_REG1]
     LD1 { v24.d }[1], [TMP_REG2]
 .endm
@@ -113,18 +149,54 @@ IOTA12:
 .macro do_Store_State
     mov TMP_REG1,x0
     add TMP_REG2,x0,#200
-    ST4 {  v0.d- v3.d }[0], [TMP_REG1], #8*4
-    ST4 {  v0.d- v3.d }[1], [TMP_REG2], #8*4
-    ST4 {  v4.d- v7.d }[0], [TMP_REG1], #8*4
-    ST4 {  v4.d- v7.d }[1], [TMP_REG2], #8*4
-    ST4 {  v8.d-v11.d }[0], [TMP_REG1], #8*4
-    ST4 {  v8.d-v11.d }[1], [TMP_REG2], #8*4
-    ST4 { v12.d-v15.d }[0], [TMP_REG1], #8*4
-    ST4 { v12.d-v15.d }[1], [TMP_REG2], #8*4
-    ST4 { v16.d-v19.d }[0], [TMP_REG1], #8*4
-    ST4 { v16.d-v19.d }[1], [TMP_REG2], #8*4
-    ST4 { v20.d-v23.d }[0], [TMP_REG1], #8*4
-    ST4 { v20.d-v23.d }[1], [TMP_REG2], #8*4
+    ST1 {  v0.d }[0], [TMP_REG1], #8
+    ST1 {  v1.d }[0], [TMP_REG1], #8
+    ST1 {  v2.d }[0], [TMP_REG1], #8
+    ST1 {  v3.d }[0], [TMP_REG1], #8
+    ST1 {  v0.d }[1], [TMP_REG2], #8
+    ST1 {  v1.d }[1], [TMP_REG2], #8
+    ST1 {  v2.d }[1], [TMP_REG2], #8
+    ST1 {  v3.d }[1], [TMP_REG2], #8
+    ST1 {  v4.d }[0], [TMP_REG1], #8
+    ST1 {  v5.d }[0], [TMP_REG1], #8
+    ST1 {  v6.d }[0], [TMP_REG1], #8
+    ST1 {  v7.d }[0], [TMP_REG1], #8
+    ST1 {  v4.d }[1], [TMP_REG2], #8
+    ST1 {  v5.d }[1], [TMP_REG2], #8
+    ST1 {  v6.d }[1], [TMP_REG2], #8
+    ST1 {  v7.d }[1], [TMP_REG2], #8
+    ST1 {  v8.d }[0], [TMP_REG1], #8
+    ST1 {  v9.d }[0], [TMP_REG1], #8
+    ST1 { v10.d }[0], [TMP_REG1], #8
+    ST1 { v11.d }[0], [TMP_REG1], #8
+    ST1 {  v8.d }[1], [TMP_REG2], #8
+    ST1 {  v9.d }[1], [TMP_REG2], #8
+    ST1 { v10.d }[1], [TMP_REG2], #8
+    ST1 { v11.d }[1], [TMP_REG2], #8
+    ST1 { v12.d }[0], [TMP_REG1], #8
+    ST1 { v13.d }[0], [TMP_REG1], #8
+    ST1 { v14.d }[0], [TMP_REG1], #8
+    ST1 { v15.d }[0], [TMP_REG1], #8
+    ST1 { v12.d }[1], [TMP_REG2], #8
+    ST1 { v13.d }[1], [TMP_REG2], #8
+    ST1 { v14.d }[1], [TMP_REG2], #8
+    ST1 { v15.d }[1], [TMP_REG2], #8
+    ST1 { v16.d }[0], [TMP_REG1], #8
+    ST1 { v17.d }[0], [TMP_REG1], #8
+    ST1 { v18.d }[0], [TMP_REG1], #8
+    ST1 { v19.d }[0], [TMP_REG1], #8
+    ST1 { v16.d }[1], [TMP_REG2], #8
+    ST1 { v17.d }[1], [TMP_REG2], #8
+    ST1 { v18.d }[1], [TMP_REG2], #8
+    ST1 { v19.d }[1], [TMP_REG2], #8
+    ST1 { v20.d }[0], [TMP_REG1], #8
+    ST1 { v21.d }[0], [TMP_REG1], #8
+    ST1 { v22.d }[0], [TMP_REG1], #8
+    ST1 { v23.d }[0], [TMP_REG1], #8
+    ST1 { v20.d }[1], [TMP_REG2], #8
+    ST1 { v21.d }[1], [TMP_REG2], #8
+    ST1 { v22.d }[1], [TMP_REG2], #8
+    ST1 { v23.d }[1], [TMP_REG2], #8
     ST1 { v24.d }[0], [TMP_REG1]
     ST1 { v24.d }[1], [TMP_REG2]
 .endm
