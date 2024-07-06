@@ -19,7 +19,7 @@ static inline void add_cycleclock(benchmark::State &st, int64_t cycles) {
     }
 }
 
-static void comprSHA2_small(benchmark::State &st) {
+static void comprSHA256_small(benchmark::State &st) {
     size_t t, total = 0;
     uint8_t msg[64 * 4];
     uint32_t ctx[8];
@@ -49,5 +49,5 @@ static void comprSHA512_small(benchmark::State &st) {
     add_cycleclock(st, total);
 }
 
-BENCHMARK(comprSHA2_small)->Unit(benchmark::kNanosecond);
+BENCHMARK(comprSHA256_small)->Unit(benchmark::kNanosecond);
 BENCHMARK(comprSHA512_small)->Unit(benchmark::kNanosecond);
