@@ -1,7 +1,14 @@
 project(corecryptocomponents)
+cmake_minimum_required(VERSION 3.24)
 
 include(ExternalProject)
 include(FetchContent)
+
+
+enable_language(C)
+enable_language(CXX)
+enable_language(ASM)
+set(CMAKE_CXX_STANDARD 17)
 
 # Gtest Directories
 set(GTEST_BASE_DIR ${CMAKE_CURRENT_BINARY_DIR}/3rd/gtest)
@@ -55,10 +62,3 @@ add_subdirectory(keccak)
 endif()
 
 add_subdirectory(sha2)
-
-cmake_minimum_required(VERSION 3.24)
-set(CMAKE_CXX_STANDARD 17)
-
-enable_language(C)
-enable_language(CXX)
-enable_language(ASM)
