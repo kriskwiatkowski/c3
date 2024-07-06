@@ -1,5 +1,3 @@
-find_package(gtest REQUIRED)
-
 add_executable(
   sha256_driver_1
   driver.cc
