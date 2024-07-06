@@ -30,3 +30,5 @@ ExternalProject_Add(
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
 add_subdirectory(aarch64)
 endif()
+
+add_subdirectory(sha2)
