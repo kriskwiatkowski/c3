@@ -99,14 +99,8 @@ void compressSHA512_small(uint64_t ctx[8], const uint8_t *in) {
     for (i = 0; i < 80; i++) {
         T1 = h + S1(e) + CH(e, f, g) + K512[i] + w[i & 15];
         T2 = S0(a) + MAJ(a, b, c);
-        h  = g;
-        g  = f;
-        f  = e;
-        e  = d + T1;
-        d  = c;
-        c  = b;
-        b  = a;
-        a  = T1 + T2;
+        h  = g; g = f; f = e; e =  d + T1;
+        d  = c; c = b; b = a; a = T1 + T2;
         w[i & 15] +=
             s1(w[(i + 14) & 15]) + w[(i + 9) & 15] + s0(w[(i + 1) & 15]);
     }
