@@ -3,6 +3,7 @@ add_executable(
   driver_speed.cc
   sha256_compress_small.c
   sha512_compress_small.c
+  sha256_compress_asm_glue.c
 )
 
 target_include_directories(
@@ -29,6 +30,7 @@ add_executable(
   driver_test.cc
   sha256_compress_small.c
   sha512_compress_small.c
+  sha256_compress_asm_glue.c
 )
 
 target_link_libraries(
